@@ -6,7 +6,7 @@ package tasks;
  */
 
 public class Subtask extends Task {
-    private final Epic id;
+    private final Epic epicId;
 
     /** Конструктор подзадачи.
      * @param title Название, кратко описывающее суть подзадачи.
@@ -15,22 +15,22 @@ public class Subtask extends Task {
      * NEW — подзадача только создана, но к её выполнению ещё не приступили.
      * IN_PROGRESS — над подзадачей ведётся работа.
      * DONE — подзадача выполнена.
-     * @param id Уникальный идентификационный номер эпика подзадачи.
+     * @param epicId Уникальный идентификационный номер эпика подзадачи.
      */
 
-    public Subtask(String title, String description, String status, Epic id) {
+    public Subtask(String title, String description, String status, Epic epicId) {
         super(title, description, status);
-        this.id = id;
+        this.epicId = epicId;
     }
 
     public Epic getEpic() {
-        return id;
+        return epicId;
     }
 
     @Override
     public String toString() {
         return  "Subtask{" +
-                "№=" + id +
+                "№=" + epicId +
                 ", Название='" + title + '\'' +
                 ", Описание='" + description + '\'' +
                 ", Статус='" + status + '\'' +

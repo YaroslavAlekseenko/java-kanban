@@ -1,3 +1,4 @@
+import managers.Manager;
 import tasks.Epic;
 import tasks.Subtask;
 import tasks.Task;
@@ -34,11 +35,27 @@ public class Main {
         System.out.println("\nSubtasks = " + manager.getSubtasks());
 
 
-        System.out.println("\n\nТестируем изменение статуса созданных объектов\n");
+        System.out.println("\n\nТестируем получение списка подзадач по идентификатору эпика\n");
+
+        System.out.println("\nSubtasks = " + manager.getEpicsSubtasks(3));
+
+
+        System.out.println("\n\nТестируем получение задачи по идентификатору\n");
+
+        System.out.println("\nTasks = " + manager.getTask(1));
+        System.out.println("\nEpics = " + manager.getEpic(3));
+        System.out.println("\nSubtasks = " + manager.getSubtask(4));
+
+
+        System.out.println("\n\nТестируем изменение/обновление созданных объектов\n");
 
         Task task1NewStatus = new Task("Task 1", "Помыть посуду", "DONE");
         task1NewStatus.setId(1);
         manager.updateTask(task1NewStatus);
+
+        Epic epic1NewStatus = new Epic("Epic №1", "Организация переезда");
+        epic1NewStatus.setId(3);
+        manager.updateEpic(epic1NewStatus);
 
         Subtask subtask11NewStatus = new Subtask("Subtask 2", "Собрать коробки", "DONE", epic1);
         subtask11NewStatus.setId(4);
@@ -58,13 +75,6 @@ public class Main {
         System.out.println("\nTasks = " + manager.getTasks());
         System.out.println("\nEpics = " + manager.getEpics());
         System.out.println("\nSubtasks = " + manager.getSubtasks());
-
-
-        System.out.println("\n\nТестируем получение задачи по идентификатору\n");
-
-        System.out.println("\nTasks = " + manager.getTask(1));
-        System.out.println("\nEpics = " + manager.getEpic(3));
-        System.out.println("\nSubtasks = " + manager.getSubtask(4));
 
 
         System.out.println("\n\nТестируем удаление всех задач\n");

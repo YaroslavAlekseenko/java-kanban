@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Epic extends Task {
 
-    private ArrayList<Integer> epicSubtasks;
+    private ArrayList<Integer> epicSubtaskIDs;
 
     /** Конструктор эпика.
      * @param title Название, кратко описывающее суть эпика.
@@ -18,15 +18,15 @@ public class Epic extends Task {
 
     public Epic(String title, String description) {
         super(title, description, "");
-        epicSubtasks = new ArrayList<>();
+        epicSubtaskIDs = new ArrayList<>();
     }
 
-    public ArrayList<Integer> getEpicSubtasks() {
-        return epicSubtasks;
+    public ArrayList<Integer> getEpicSubtaskIDs() {
+        return epicSubtaskIDs;
     }
 
-    public void setEpicSubtasks(ArrayList<Integer> epicSubtasks) {
-        this.epicSubtasks = epicSubtasks;
+    public void setEpicSubtaskIDs(ArrayList<Integer> epicSubtaskIDs) {
+        this.epicSubtaskIDs = epicSubtaskIDs;
     }
 
     @Override
