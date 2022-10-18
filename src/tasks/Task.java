@@ -8,7 +8,7 @@ public class Task {
     protected int id;
     protected String title;
     protected String description;
-    protected String status;
+    protected Status status;
 
     /** Конструктор задачи.
      * @param title Название, кратко описывающее суть задачи (например, «Переезд»).
@@ -18,7 +18,7 @@ public class Task {
      * IN_PROGRESS — над задачей ведётся работа.
      * DONE — задача выполнена.
      */
-    public Task(String title, String description, String status) {
+    public Task(String title, String description, Status status) {
         this.title = title;
         this.description = description;
         this.status = status;
@@ -28,11 +28,11 @@ public class Task {
         return id;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

@@ -18,7 +18,7 @@ public class Subtask extends Task {
      * @param epicId Уникальный идентификационный номер эпика подзадачи.
      */
 
-    public Subtask(String title, String description, String status, Epic epicId) {
+    public Subtask(String title, String description, Status status, Epic epicId) {
         super(title, description, status);
         this.epicId = epicId;
     }
