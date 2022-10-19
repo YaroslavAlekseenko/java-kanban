@@ -1,5 +1,7 @@
 package tasks;
 
+import java.util.Objects;
+
 /** Класс задачи.
  * Простейшим элементом трекера является задача (англ. task).
  */
@@ -48,5 +50,27 @@ public class Task {
                 ", Описание='" + description + '\'' +
                 ", Статус='" + status + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Task task = (Task) o;
+
+        if (id != task.id) return false;
+        if (!Objects.equals(title, task.title)) return false;
+        if (!Objects.equals(description, task.description)) return false;
+        return status == task.status;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        return result;
     }
 }

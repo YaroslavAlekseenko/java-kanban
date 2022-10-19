@@ -198,8 +198,7 @@ public class InMemoryTaskManager implements TaskManager{
     }
 
     /** Проверка и изменение статуса эпика. */
-    @Override
-    public void updateEpicStatus(Epic epic) {
+    private void updateEpicStatus(Epic epic) {
 
         if (epic.getEpicSubtaskIDs().size() == 0) {
             epic.setStatus(Status.NEW);

@@ -2,7 +2,7 @@ package managers;
 
 import tasks.Task;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /** Класс менеджера истории просмотров.
@@ -11,10 +11,12 @@ import java.util.List;
 
 public class InMemoryHistoryManager implements HistoryManager {
 
-    private final List<Task> taskHistory;
+    private final LinkedList<Task> taskHistory;
+
+    private final static byte MAXLOGHISTORY = 10;
 
     public InMemoryHistoryManager() {
-        taskHistory = new ArrayList<>();
+        taskHistory = new LinkedList<>();
     }
 
     /** Добавление просмотров задач. */
@@ -22,8 +24,8 @@ public class InMemoryHistoryManager implements HistoryManager {
     public void add(Task task) {
         if (!(task == null)) {
             taskHistory.add(task);
-            if (taskHistory.size() > 10) {
-                taskHistory.remove(0);
+            if (taskHistory.size() > MAXLOGHISTORY) {
+                taskHistory.removeFirst();
             }
         }
     }

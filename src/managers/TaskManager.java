@@ -72,9 +72,4 @@ public interface TaskManager {
 
     /** Удаление всех подзадач. */
     void deleteAllSubtasks();
-
-    /**
-     * Проверка и изменение статуса эпика.
-     */
-     void updateEpicStatus(Epic epic);
 }
