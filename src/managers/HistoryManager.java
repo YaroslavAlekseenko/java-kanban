@@ -13,6 +13,9 @@ public interface HistoryManager {
     /** Добавление просмотров задач. */
     void add(Task task);
 
+    /** Удаление задачи из просмотра. */
+    void remove(int id);
+
     /** Вызов истории просмотров задач. */
     List<Task> getHistory();
 
