@@ -23,13 +23,13 @@ public class InMemoryHistoryManager implements HistoryManager {
     public void linkLast(Task task) {
         final Node oldTail = tail;
         final Node newNode = new Node(oldTail, task, null);
-        tail = newNode;
         receivedTasks.put(task.getId(), newNode);
         if (oldTail == null) {
             head = newNode;
         } else {
             oldTail.next = newNode;
         }
+        tail = newNode;
     }
 
     /**  Реализация метода getTasks двусвязного списка. */

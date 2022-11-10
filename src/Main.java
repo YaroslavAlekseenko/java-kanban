@@ -37,9 +37,9 @@ public class Main {
         manager.getSubtask(2);
         manager.getEpic(1);
         System.out.println("\nИстория просмотров = " + manager.getHistory());
-        manager.deleteEpic(5);
+        manager.deleteAllSubtasks();
         System.out.println("\nИстория просмотров = " + manager.getHistory());
-        manager.deleteEpic(1);
+        manager.deleteAllEpics();
         System.out.println("\nИстория просмотров = " + manager.getHistory());
     }
 }
