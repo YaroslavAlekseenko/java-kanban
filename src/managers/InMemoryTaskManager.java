@@ -16,11 +16,11 @@ import static tasks.Status.NEW;
  */
 
 public class InMemoryTaskManager implements TaskManager{
-    private int id;
-    private final HashMap<Integer, Task> tasks;
-    private final HashMap<Integer, Subtask> subtasks;
-    private final HashMap<Integer, Epic> epics;
-    private final HistoryManager historyManager;
+    protected int id;
+    protected HashMap<Integer, Task> tasks;
+    protected HashMap<Integer, Subtask> subtasks;
+    protected HashMap<Integer, Epic> epics;
+    protected HistoryManager historyManager;
 
 
     public InMemoryTaskManager() {
@@ -60,8 +60,8 @@ public class InMemoryTaskManager implements TaskManager{
 
     /** Извлечение списка задач. */
     @Override
-    public List<Task> getTasks() {
-        return new ArrayList<>(tasks.values());
+    public HashMap<Integer, Task> getTasks() {
+        return tasks;
     }
 
     /** Удаление задачи по идентификатору. */
@@ -104,8 +104,8 @@ public class InMemoryTaskManager implements TaskManager{
 
     /** Извлечение списка эпиков. */
     @Override
-    public List<Epic> getEpics() {
-        return new ArrayList<>(epics.values());
+    public HashMap<Integer, Epic> getEpics() {
+        return epics;
     }
 
     /** Удаление эпика и его подзадач по идентификатору. */
@@ -178,8 +178,8 @@ public class InMemoryTaskManager implements TaskManager{
 
     /** Извлечение списка подзадач. */
     @Override
-    public List<Subtask> getSubtasks() {
-        return new ArrayList<>(subtasks.values());
+    public HashMap<Integer, Subtask> getSubtasks() {
+        return subtasks;
     }
 
     /** Удаление подзадачи по идентификатору. */

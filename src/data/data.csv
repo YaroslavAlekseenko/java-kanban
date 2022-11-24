@@ -1,0 +1,9 @@
+id,type,name,status,description,epic
+1,EPIC,Epic №1,IN_PROGRESS,Переезд,
+2,SUBTASK,Subtask 1,IN_PROGRESS,Собрать коробки,1
+3,SUBTASK,Subtask 2,DONE,Упаковать кошку,1
+4,SUBTASK,Subtask 3,NEW,Погрузить вещи в авто,1
+5,EPIC,Epic №2,NEW,Организовать большой семейный праздник,
+6,TASK,Task 1,DONE,Выполнить спринт 6,
+
+1,2,3,4,5,6

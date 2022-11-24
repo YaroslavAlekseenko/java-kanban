@@ -1,5 +1,7 @@
 package tasks;
 
+import managers.TaskType;
+
 import java.util.Objects;
 
 /** Класс задачи.
@@ -11,6 +13,7 @@ public class Task {
     protected String title;
     protected String description;
     protected Status status;
+    protected TaskType taskType;
 
     /** Конструктор задачи.
      * @param title Название, кратко описывающее суть задачи (например, «Переезд»).
@@ -24,6 +27,15 @@ public class Task {
         this.title = title;
         this.description = description;
         this.status = status;
+        this.taskType = TaskType.TASK;
+    }
+
+    public Task(int id, String title, String description, Status status) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.status = status;
+        this.taskType = TaskType.TASK;
     }
 
     public int getId() {
@@ -50,6 +62,10 @@ public class Task {
                 ", Описание='" + description + '\'' +
                 ", Статус='" + status + '\'' +
                 '}';
+    }
+
+    public String toStringFromFile() {
+        return String.format("%s,%s,%s,%s,%s,%s", id, taskType, title, status, description, "");
     }
 
     @Override

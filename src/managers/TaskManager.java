@@ -4,6 +4,7 @@ import tasks.Epic;
 import tasks.Subtask;
 import tasks.Task;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**  Интерфейс менеджера задач.
@@ -25,7 +26,7 @@ public interface TaskManager {
     Task getTask(int id);
 
     /** Извлечение списка задач. */
-    List<Task> getTasks();
+    HashMap<Integer, Task> getTasks();
 
     /** Удаление задачи по идентификатору. */
     void deleteTask(int id);
@@ -43,7 +44,7 @@ public interface TaskManager {
     Epic getEpic(int id);
 
     /** Извлечение списка эпиков. */
-    List<Epic> getEpics();
+    HashMap<Integer, Epic> getEpics();
 
     /** Удаление эпика и его подзадач по идентификатору. */
     void deleteEpic(int id);
@@ -64,7 +65,7 @@ public interface TaskManager {
     List<Subtask> getEpicsSubtasks(int id);
 
     /** Извлечение списка подзадач. */
-    List<Subtask> getSubtasks();
+    HashMap<Integer, Subtask> getSubtasks();
 
     /** Удаление подзадачи по идентификатору. */
     void deleteSubtask(int id);

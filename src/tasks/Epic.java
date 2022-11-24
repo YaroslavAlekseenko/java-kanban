@@ -1,5 +1,7 @@
 package tasks;
 
+import managers.TaskType;
+
 import java.util.ArrayList;
 
 /** Класс эпика.
@@ -19,6 +21,21 @@ public class Epic extends Task {
     public Epic(String title, String description) {
         super(title, description, Status.NEW);
         epicSubtaskIDs = new ArrayList<>();
+        this.taskType = TaskType.EPIC;
+    }
+
+    public Epic(int id, String title, String description) {
+        super(id, title, description, null);
+        epicSubtaskIDs = new ArrayList<>();
+        this.taskType = TaskType.EPIC;
+    }
+
+    public Epic(int id, String title, Status status, String description) {
+        super(id, title, description, null);
+        epicSubtaskIDs = new ArrayList<>();
+        this.taskType = TaskType.EPIC;
+        this.status = status;
+
     }
 
     public ArrayList<Integer> getEpicSubtaskIDs() {
