@@ -18,8 +18,8 @@ public class Managers {
         return new InMemoryHistoryManager();
     }
 
-    /** Возврат объекта реализующего интерфейс HistoryManager */
+    /** Возврат объекта реализующего FileBackedTasksManager */
     public static FileBackedTasksManager getDefaultFileBackedTasksManager(){
-        return new FileBackedTasksManager(new File("C:/Users/Yaroslav/dev/java-kanban/src/data/data.csv"));
+        return new FileBackedTasksManager(new File("src/data/data.csv"));
     }
 }

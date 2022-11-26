@@ -26,7 +26,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
     /** Создание файла. */
     public FileBackedTasksManager(File file) {
         this.file = file;
-        String fileName = "C:/Users/Yaroslav/dev/java-kanban/src/data/data.csv";
+        String fileName = "src/data/data.csv";
         file = new File(fileName);
         if (!file.isFile()) {
             try {
@@ -42,7 +42,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
         FileBackedTasksManager fileBackedTasksManager = new FileBackedTasksManager(file);
         String data;
         try {
-            Path pathToFile = Paths.get("C:/Users/Yaroslav/dev/java-kanban/src/data/data.csv");
+            Path pathToFile = Paths.get("src/data/data.csv");
             data = Files.readString(pathToFile.toAbsolutePath());
         } catch (IOException e) {
             throw new ManagerSaveException("Ошибка чтения файла.");
@@ -178,7 +178,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
 
     /** Сохранение текущего состояния менеджера в указанный файл. */
     public void save() {
-        try (Writer writer = new FileWriter("C:/Users/Yaroslav/dev/java-kanban/src/data/data.csv")) {
+        try (Writer writer = new FileWriter(file)) {
             writer.write("id,type,name,status,description,epic\n");
             HashMap<Integer, String> allTasks = new HashMap<>();
             HashMap<Integer, Task> tasks = super.getTasks();

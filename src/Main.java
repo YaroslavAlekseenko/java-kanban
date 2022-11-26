@@ -12,7 +12,7 @@ public class Main {
 
         System.out.println("\n\nТестируем спринт №6\n");
 
-        File file = new File("data/data.csv");
+        File file = new File("src/data/data.csv");
 
         FileBackedTasksManager fileBackedTasksManager = Managers.getDefaultFileBackedTasksManager();
 
