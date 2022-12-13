@@ -18,5 +18,4 @@ public interface HistoryManager {
 
     /** Вызов истории просмотров задач. */
     List<Task> getHistory();
-
 }

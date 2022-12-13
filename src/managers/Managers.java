@@ -20,6 +20,6 @@ public class Managers {
 
     /** Возврат объекта реализующего FileBackedTasksManager */
     public static FileBackedTasksManager getDefaultFileBackedTasksManager(){
-        return new FileBackedTasksManager(new File("src/data/data.csv"));
+        return new FileBackedTasksManager(Managers.getDefaultHistory(), new File("src/data/data.csv"));
     }
 }

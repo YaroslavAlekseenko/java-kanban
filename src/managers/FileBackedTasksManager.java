@@ -12,6 +12,7 @@ import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +25,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
     protected final File file;
 
     /** Создание файла. */
-    public FileBackedTasksManager(File file) {
+    public FileBackedTasksManager(HistoryManager defaultHistory, File file) {
         this.file = file;
         String fileName = "src/data/data.csv";
         file = new File(fileName);
@@ -39,7 +40,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
 
     /** Восстановление данных менеджера из файла при запуске программы. */
     public static void loadFromFile(File file) {
-        FileBackedTasksManager fileBackedTasksManager = new FileBackedTasksManager(file);
+        FileBackedTasksManager fileBackedTasksManager = new FileBackedTasksManager(Managers.getDefaultHistory(), file);
         String data;
         try {
             Path pathToFile = Paths.get("src/data/data.csv");
@@ -153,19 +154,21 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
 
     /** Создание задачи из строки. */
     private static Task fromString(String value, TaskType taskType, FileBackedTasksManager fileBackedTasksManager) {
-        String[] dataOfTask = value.split(",", 6);
+        String[] dataOfTask = value.split(",", 8);
         int id = Integer.parseInt(dataOfTask[0]);
         String name = dataOfTask[2];
         Status status = Status.valueOf(dataOfTask[3]);
         String description = dataOfTask[4];
-        String epicIdString = dataOfTask[5].trim();
+        LocalDateTime startTime = LocalDateTime.parse(dataOfTask[5]);
+        long duration = Long.parseLong(dataOfTask[6]);
+        String epicIdString = (dataOfTask[7].trim());
         switch (taskType) {
             case TASK:
-                return new Task(id, name, description, status);
+                return new Task(id, name, description, status, startTime, duration);
             case SUBTASK:
-                return new Subtask(id, name, description, status, fileBackedTasksManager.epics.get(Integer.valueOf(epicIdString)));
+                return new Subtask(id, name, description, status, startTime, duration, fileBackedTasksManager.epics.get(Integer.valueOf(epicIdString)));
             case EPIC:
-                return new Epic(id, name, status, description);
+                return new Epic(id, name, status, description, startTime, duration);
             default:
                 return null;
         }
@@ -179,7 +182,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
     /** Сохранение текущего состояния менеджера в указанный файл. */
     public void save() {
         try (Writer writer = new FileWriter(file)) {
-            writer.write("id,type,name,status,description,epic\n");
+            writer.write("id,type,name,status,description,epic,startTime,duration\n");
             HashMap<Integer, String> allTasks = new HashMap<>();
             HashMap<Integer, Task> tasks = super.getTasks();
             for (Integer id : tasks.keySet()) {
