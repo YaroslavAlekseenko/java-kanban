@@ -94,6 +94,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
         for (String subtaskLine : subtasks) {
             Subtask subtask = (Subtask) fromString(subtaskLine, TaskType.SUBTASK, fileBackedTasksManager);
             assert subtask != null;
+            fileBackedTasksManager.prioritizedTasks.add(subtask);
             int id = subtask.getId();
             if (id > maxId) {
                 maxId = id;
@@ -104,6 +105,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
         for (String taskLine : tasks) {
             Task task = fromString(taskLine, TaskType.TASK, fileBackedTasksManager);
             assert task != null;
+            fileBackedTasksManager.prioritizedTasks.add(task);
             int id = task.getId();
             if (id > maxId) {
                 maxId = id;

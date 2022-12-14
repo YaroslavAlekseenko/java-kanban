@@ -253,8 +253,8 @@ public class InMemoryTaskManager implements TaskManager{
     /** Изменение времени эпика. */
     public void updateTimeEpic(Epic epic) {
             List<Subtask> subtasks = getEpicsSubtasks(epic.getId());
-            LocalDateTime startTime = LocalDateTime.now().plusYears(100);
-            LocalDateTime endTime = LocalDateTime.now();
+            LocalDateTime startTime = LocalDateTime.MAX;
+            LocalDateTime endTime = LocalDateTime.MIN;
             for (Subtask subtask : subtasks) {
                 if (subtask.getStartTime().isBefore(startTime)) startTime = subtask.getStartTime();
                 if (subtask.getEndTime().isAfter(endTime)) endTime = subtask.getEndTime();
@@ -266,13 +266,13 @@ public class InMemoryTaskManager implements TaskManager{
     }
 
     /** Добавление задач в список в порядке приоритета. */
-    private void addPrioritizedTask(Task task) {
+    public void addPrioritizedTask(Task task) {
         prioritizedTasks.add(task);
         checkTaskPriority();
     }
 
     /** Проверка времени. */
-    public boolean checkTime(Task task) {
+    public boolean doesTimeOverlap(Task task) {
         List<Task> tasks = List.copyOf(prioritizedTasks);
         for (Task prioritizedTask : tasks) {
             if (task.getStartTime().isBefore(prioritizedTask.getStartTime())
@@ -291,7 +291,7 @@ public class InMemoryTaskManager implements TaskManager{
         List<Task> tasks = getPrioritizedTasks();
         for (int i = 1; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            if (checkTime(task)) {
+            if (doesTimeOverlap(task)) {
                 throw new ManagerCheckException(
                         "Задача №" + task.getId() + " пересекается с текущими задачами, нужно изменить время");
             }

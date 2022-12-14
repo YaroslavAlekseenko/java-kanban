@@ -64,23 +64,23 @@ public class InMemoryHistoryManagerTest {
         manager.add(epic);
 
         assertNotNull(manager.getHistory(), "История пустая.");
-        assertEquals(List.of(task, task1, task2, epic), manager.getHistory(), "Задачи дублируются.");
+        assertEquals(List.of(task, task1, task2, epic), manager.getHistory(), "Ошибка добавления в историю");
 
         manager.remove(3);
 
         assertNotNull(manager.getHistory(), "История пустая.");
-        assertEquals(List.of(task, task2, epic), manager.getHistory(), "Задачи дублируются.");
+        assertEquals(List.of(task, task2, epic), manager.getHistory(), "Задача из истории не удалена.");
 
         manager.remove(1);
 
         assertNotNull(manager.getHistory(), "История пустая.");
-        assertEquals(List.of(task2, epic), manager.getHistory(), "Задачи дублируются.");
+        assertEquals(List.of(task2, epic), manager.getHistory(), "Задача из истории не удалена.");
 
 
         manager.remove(2);
 
         assertNotNull(manager.getHistory(), "История пустая.");
-        assertEquals(List.of(task2), manager.getHistory(), "Задачи дублируются.");
+        assertEquals(List.of(task2), manager.getHistory(), "Задача из истории не удалена.");
     }
 
 
