@@ -48,7 +48,7 @@ public class InMemoryHistoryManagerTest {
         manager.add(task1);
 
         assertNotNull(manager.getHistory(), "История пустая.");
-        assertEquals(List.of(epic, task), manager.getHistory(), "Задачи дублируются.");
+        assertNotEquals(List.of(task, epic, task1), manager.getHistory(), "Задачи дублируются.");
     }
 
     /** Для HistoryManager — тесты для всех методов интерфейса. Удаление из истории: начало, середина, конец.*/

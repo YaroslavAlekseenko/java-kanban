@@ -20,12 +20,11 @@ import java.util.List;
 /** Класс менеджера.
  * Запускается на старте программы, управляет всеми задачами и хранит информацию в файле.
  */
-
 public class FileBackedTasksManager extends InMemoryTaskManager {
     protected final File file;
 
     /** Создание файла. */
-    public FileBackedTasksManager(HistoryManager defaultHistory, File file) {
+    public FileBackedTasksManager(File file) {
         this.file = file;
         String fileName = "src/data/data.csv";
         file = new File(fileName);
@@ -40,7 +39,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
 
     /** Восстановление данных менеджера из файла при запуске программы. */
     public static void loadFromFile(File file) {
-        FileBackedTasksManager fileBackedTasksManager = new FileBackedTasksManager(Managers.getDefaultHistory(), file);
+        FileBackedTasksManager fileBackedTasksManager = new FileBackedTasksManager(file);
         String data;
         try {
             Path pathToFile = Paths.get("src/data/data.csv");

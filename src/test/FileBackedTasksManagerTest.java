@@ -1,7 +1,6 @@
 package test;
 
 import managers.FileBackedTasksManager;
-import managers.Managers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tasks.Epic;
@@ -21,7 +20,7 @@ public class FileBackedTasksManagerTest extends TaskManagerTest<FileBackedTasksM
     File file = new File("data.test.csv");
     @BeforeEach
     public void beforeEach() {
-        manager = new FileBackedTasksManager(Managers.getDefaultHistory(), file);
+        manager = new FileBackedTasksManager(file);
     }
 
     /** Для FileBackedTasksManager — проверка работы по сохранению и восстановлению состояния.*/
