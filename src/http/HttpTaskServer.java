@@ -32,7 +32,7 @@ public class HttpTaskServer {
 
     public HttpTaskServer(HttpTaskManager defaultHttpTaskManager) throws IOException {
         this.httpTaskManager = defaultHttpTaskManager;
-        this.httpTaskManager.loadFromFile();
+        this.httpTaskManager.load();
         this.gson = Managers.getGson();
         this.server = HttpServer.create(new InetSocketAddress("localhost", 8080), 0);
         this.server.createContext("/tasks", this::handler);
@@ -86,8 +86,13 @@ public class HttpTaskServer {
             case "POST": {
                 try {
                     Task task = gson.fromJson(body, Task.class);
-                    httpTaskManager.addTask(task);
-                    exchange.sendResponseHeaders(200, 0);
+                    if (httpTaskManager.getTasks().containsValue(task)) {
+                        httpTaskManager.updateTask(task);
+                        exchange.sendResponseHeaders(200, 0);
+                    } else {
+                        httpTaskManager.addTask(task);
+                        exchange.sendResponseHeaders(200, 0);
+                    }
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
@@ -129,8 +134,13 @@ public class HttpTaskServer {
             case "POST": {
                 try {
                     Epic epic = gson.fromJson(body, Epic.class);
-                    httpTaskManager.addEpic(epic);
-                    exchange.sendResponseHeaders(200, 0);
+                    if (httpTaskManager.getEpics().containsValue(epic)) {
+                        httpTaskManager.updateEpic(epic);
+                        exchange.sendResponseHeaders(200, 0);
+                    } else {
+                        httpTaskManager.addEpic(epic);
+                        exchange.sendResponseHeaders(200, 0);
+                    }
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
@@ -158,11 +168,18 @@ public class HttpTaskServer {
         switch (requestMethod) {
             case "GET": {
                 if (query != null) {
-                    String idSubTask = query.substring(3);
-                    Subtask subtask = httpTaskManager.getSubtask(Integer.parseInt(idSubTask));
-                    String response = gson.toJson(subtask);
-                    sendText(exchange, response);
-                    return;
+                    if (exchange.getRequestURI().getPath().replaceFirst("/tasks/subtask/", "").equals("epic")) {
+                        String idEpic = query.substring(3);
+                        String response = gson.toJson(httpTaskManager.getEpicsSubtasks(Integer.parseInt(idEpic)));
+                        sendText(exchange, response);
+                        return;
+                    } else {
+                        String idSubTask = query.substring(3);
+                        Subtask subtask = httpTaskManager.getSubtask(Integer.parseInt(idSubTask));
+                        String response = gson.toJson(subtask);
+                        sendText(exchange, response);
+                        return;
+                    }
                 } else {
                     String response = gson.toJson(httpTaskManager.getSubtasks());
                     sendText(exchange, response);
@@ -172,8 +189,13 @@ public class HttpTaskServer {
             case "POST": {
                 try {
                     Subtask subtask = gson.fromJson(body, Subtask.class);
-                    httpTaskManager.addSubtask(subtask);
-                    exchange.sendResponseHeaders(200, 0);
+                    if (httpTaskManager.getSubtasks().containsValue(subtask)) {
+                        httpTaskManager.updateSubtask(subtask);
+                        exchange.sendResponseHeaders(200, 0);
+                    } else {
+                        httpTaskManager.addSubtask(subtask);
+                        exchange.sendResponseHeaders(200, 0);
+                    }
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }

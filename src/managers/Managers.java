@@ -3,9 +3,11 @@ package managers;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import http.HttpTaskManager;
+import http.KVServer;
 import http.LocalDateTimeAdapter;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 /** Утилитарный класс.
@@ -14,9 +16,16 @@ import java.time.LocalDateTime;
 
 public class Managers {
 
+    /** Возврат объекта реализующего KVServer */
+    public static KVServer getDefaultKVServer() throws IOException {
+        KVServer kvServer = new KVServer();
+        kvServer.start();
+        return kvServer;
+    }
+
     /** Возврат объекта реализующего интерфейс TaskManager */
     public static TaskManager getDefault(){
-        return new InMemoryTaskManager();
+        return new HttpTaskManager();
     }
 
     /** Возврат объекта реализующего интерфейс HistoryManager */

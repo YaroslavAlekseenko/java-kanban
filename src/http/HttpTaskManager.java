@@ -21,7 +21,7 @@ public class HttpTaskManager extends FileBackedTasksManager {
         this.client = new KVTaskClient();
     }
 
-    public void loadFromFile() {
+    public void load() {
         Type tasksType = new TypeToken<List<Task>>(){}.getType();
         List<Task> tasks = gson.fromJson(client.load("tasks"), tasksType);
         if (tasks != null) {
